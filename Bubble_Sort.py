@@ -1,4 +1,4 @@
-/#!/usr/bin/env python3
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
 Title: Bubble Sort Algorithm
@@ -27,11 +27,9 @@ def bubble_sort(arr):
             if arr[j] > arr[j+1]:
                 temp = arr[j]
                 arr[j] = arr[j+1]
-                arr[j+1] = max_val
+                arr[j+1] = temp
     return arr
     
-
-
 ####################
 ## TEST FUNCTIONS ##
 ####################
