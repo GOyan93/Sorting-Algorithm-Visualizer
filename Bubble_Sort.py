@@ -20,7 +20,16 @@ negative integers floating point numericals, and other inputs.
 ##########################
 
 def bubble_sort(arr):
-    pass
+    # Function iterates through array. Swapping highest values until length of list.
+    # Function has linear complexity of O(N)
+    for i in range(len(arr)-1, 0, -1):
+        for j in range(i):
+            if arr[j] > arr[j+1]:
+                temp = arr[j]
+                arr[j] = arr[j+1]
+                arr[j+1] = max_val
+    return arr
+    
 
 
 ####################
@@ -55,6 +64,9 @@ def neg_flt_test(func):
 def non_list_test(func):
     pass
 
+# Determine sorting of a single digit list.
+def single_test(func):
+    pass
 
 
 
