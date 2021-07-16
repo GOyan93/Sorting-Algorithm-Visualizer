@@ -34,9 +34,14 @@ def bubble_sort(arr):
     return arr
  
 
-
-
-
+#############################
+## SELECTION SORT FUNCTION ##
+#############################
+    
+def selection_sort(arr):
+    # Function iterates through array and takes either max or mix. Makes one swap
+    # at the end of each iteration. 
+    # Function has a exponential complexity of O(n^2)
 
 
 ####################
