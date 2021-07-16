@@ -18,9 +18,7 @@ import random
 
 
 
-##########################
-## BUBBLE SORT FUNCTION ##
-##########################
+# SORTING FUNCTIONS
 
 def bubble_sort(arr):
     # Function iterates through array. Swapping highest values until length of list.
@@ -34,10 +32,7 @@ def bubble_sort(arr):
     return arr
  
 
-#############################
-## SELECTION SORT FUNCTION ##
-#############################
-    
+
 def selection_sort(arr):
     # Function iterates through array and takes either max or mix. Makes one swap
     # at the end of each iteration. 
@@ -51,13 +46,12 @@ def selection_sort(arr):
             arr[j] = arr[position_of_max]
             arr[position_of_max] = temp
     return arr
-            
-        
-        
 
-####################
-## TEST FUNCTIONS ##
-####################
+
+
+    
+
+# UNIT TEST FUNCTION
     
 # Determine sorting of a list of integers.
 unsorted_array = [random.randint(1, 100000) for x in range(1, 1000)]
