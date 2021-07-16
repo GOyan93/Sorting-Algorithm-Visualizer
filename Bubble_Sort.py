@@ -14,6 +14,9 @@ The tests for this algorithm will use end cases involving the '0' integer,
 negative integers floating point numericals, and other inputs.
 """
 
+import random
+
+
 
 ##########################
 ## BUBBLE SORT FUNCTION ##
@@ -33,5 +36,53 @@ def bubble_sort(arr):
 
 
 
+
+
+
+####################
+## TEST FUNCTIONS ##
+####################
+    
+# Determine sorting of a list of integers.
+unsorted_array = [random.randint(1, 100000) for x in range(1, 1000)]
+sorted_array = sorted(unsorted_array)
+assert(bubble_sort(unsorted_array) == sorted_array), "Bubble Sort: Integer Test Failed."
     
 
+# Determine sorting of a list with integer 0
+unsorted_array = [random.randint(0, 100000) for x in range(1, 1000)]
+sorted_array = sorted(unsorted_array)
+assert(bubble_sort(unsorted_array) == sorted_array), "Bubble Sort: Zero Test Failed."
+    
+
+# Determine sorting of a list with negative integer.
+unsorted_array = [random.randint(-1000000, 100000) for x in range(1, 1000)]
+sorted_array = sorted(unsorted_array)
+assert(bubble_sort(unsorted_array) == sorted_array), "Bubble Sort: Negative Test Failed."
+
+
+# Determine sorting of a list with floating point numbers.
+unsorted_array = [random.random() for x in range(1, 1000)]
+sorted_array = sorted(unsorted_array)
+assert(bubble_sort(unsorted_array) == sorted_array), "Bubble Sort: Floating Point Test Failed."
+
+
+# Determine sorting of a list with 0.0 floating point.
+unsorted_array = [random.random() for x in range(1, 1000)]
+unsorted_array.append(0.0)
+sorted_array = sorted(unsorted_array)
+assert(bubble_sort(unsorted_array) == sorted_array), "Bubble Sort: Floating Point Test Failed."
+    
+
+# Determine sorting of a list with negative floating point numbers.
+unsorted_array = [random.random() for x in range(1, 1000)]
+unsorted_array += [(random.random()*(-1)) for x in range(1, 100)]
+sorted_array = sorted(unsorted_array)
+assert(bubble_sort(unsorted_array) == sorted_array), "Bubble Sort: Floating Point Test Failed."
+print(sorted_array)
+
+# Determine sorting of a single digit list.
+unsorted_array = [random.randint(0,1000)]
+sorted_array = sorted(unsorted_array)
+assert(bubble_sort(unsorted_array) == sorted_array), "Bubble Sort: Single Integer Test Failed."
+    
