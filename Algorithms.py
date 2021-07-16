@@ -49,7 +49,15 @@ def selection_sort(arr):
 
 
 
-    
+def insertion_sort(arr):
+    # Function creates sorted sublist as it iterates through the array.
+    # Each item is compared then shuffled down the list until it is greater
+    # than the previous item. 
+    # Function has a linear complexity of O(n)
+    for i in range(1, len(arr)-1):
+        while arr[i] < arr[i-1]:
+            pass
+            
 
 # UNIT TEST FUNCTION
     
@@ -61,10 +69,11 @@ assert(selection_sort(unsorted_array) == sorted_array), "Selection Sort: Integer
 
 # Determine sorting of a list with integer 0
 unsorted_array = [random.randint(0, 100000) for x in range(1, 1000)]
+unsorted_array += [0]
 sorted_array = sorted(unsorted_array)
 assert(bubble_sort(unsorted_array) == sorted_array), "Bubble Sort: Zero Test Failed."
 assert(bubble_sort(unsorted_array) == sorted_array), "Selection Sort: Zero Test Failed."
-    
+
 
 # Determine sorting of a list with negative integer.
 unsorted_array = [random.randint(-1000000, 100000) for x in range(1, 1000)]
@@ -102,6 +111,15 @@ sorted_array = sorted(unsorted_array)
 assert(bubble_sort(unsorted_array) == sorted_array), "Bubble Sort: Single Integer Test Failed."
 assert(selection_sort(unsorted_array) == sorted_array), "Selection Sort: Single Integer Test Failed."
     
+
+# Determine sorting of repeated integers.
+unsorted_array = [random.randint(0,1000) for x in range(1000)]
+unsorted_array += [2, 3, 2, 10, 5, 10]
+sorted_array = sorted(unsorted_array)
+assert(bubble_sort(unsorted_array) == sorted_array), "Bubble Sort: Single Integer Test Failed."
+assert(selection_sort(unsorted_array) == sorted_array), "Selection Sort: Single Integer Test Failed."
+
+
 # Prints result of each sorting algorithm.
 def algo_print():
     unsorted_arr = [random.randint(-1000, 1000) for x in range(10)]
