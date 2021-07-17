@@ -5,7 +5,7 @@ Created on Fri Jul 16 21:04:30 2021
 
 @author: greg
 """
-import unittest
+import unittest, random
 
 # UNIT TEST FUNCTION
 class testSorting(unittest.TestCase):
@@ -96,11 +96,11 @@ class testSorting(unittest.TestCase):
         sorted_array = sorted(unsorted_array)
         self.assertEqual (selection_sort(unsorted_array), sorted_array, "Selection Sort: Zero Floating Point Test Failed.")
         
-    def test_zero_fltinsertion_sort(self):
+    def test_zero_flt_insertion_sort(self):
         unsorted_array = [random.random() for x in range(1, 100)]
         unsorted_array.append(0.0)
         sorted_array = sorted(unsorted_array)
-        self.assertEqual (insertion_sort(unsorted_array), sorted_array, "Insertion Sort: Zero Floating Point Test Failed."))
+        self.assertEqual (insertion_sort(unsorted_array), sorted_array, "Insertion Sort: Zero Floating Point Test Failed.")
         
         
         # Determine sorting of a list with negative floating point numbers.
@@ -134,7 +134,7 @@ class testSorting(unittest.TestCase):
         sorted_array = sorted(unsorted_array)
         self.assertEqual (selection_sort(unsorted_array), sorted_array, "Selection Sort: Single Integer Test Failed.")
         
-    def test_single_int_binsertion_sort(self):
+    def test_single_int_insertion_sort(self):
         unsorted_array = [random.randint(0,100)]
         sorted_array = sorted(unsorted_array)
         self.assertEqual (insertion_sort(unsorted_array), sorted_array, "Insertion Sort: Single Integer Test Failed.")
