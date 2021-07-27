@@ -18,21 +18,29 @@ window.rowconfigure(0, minsize = 50, weight = 1)
 window.rowconfigure(1, minsize = 400, weight = 1)
 window.rowconfigure(2, minsize = 50, weight = 1)
 
+
+
 # Creates layout of GUI
 frm_algorithms = tk.Frame(master = window)
 frm_graph_visual = tk.Frame(master = window)
 frm_number_slider = tk.Frame(master = window)
+
+frm_algorithms.grid(row = 0, sticky = "ew")
+frm_graph_visual.grid(row = 1, sticky = "nsew", pady = 2) 
+frm_number_slider.grid(row = 2, sticky = "ew", pady = 2)
 
 # Buttons for GUI
 btn_bubble_sort = tk.Button(frm_algorithms, text = "Bubble Sort")
 btn_insertion_sort = tk.Button(frm_algorithms, text = "Insertion Sort")
 btn_selection_sort = tk.Button(frm_algorithms, text = "Selection Sort")
 btn_reset = tk.Button(frm_number_slider, text = "Reset")
+scl_arr_size = tk.Scale(frm_number_slider, from_ = 1, to = 200, orient=tk.HORIZONTAL)
 
-btn_bubble_sort.grid(row = 0, column = 0, padx = 2)
-btn_insertion_sort.grid(row = 0, column = 1, padx = 2)
-btn_selection_sort.grid(row = 0, column = 2, padx = 2)
+btn_bubble_sort.grid(row = 0, column = 0, padx = 2, sticky = "ew")
+btn_insertion_sort.grid(row = 0, column = 1, padx = 2, sticky = "ew")
+btn_selection_sort.grid(row = 0, column = 2, padx = 2, sticky = "ew")
 btn_reset.grid(row = 0, column = 0, padx = 2)
+scl_arr_size.grid(row = 0, column = 1)
 
 
 
