@@ -29,18 +29,21 @@ frm_algorithms.grid(row = 0, sticky = "ew")
 frm_graph_visual.grid(row = 1, sticky = "nsew", pady = 2) 
 frm_number_slider.grid(row = 2, sticky = "ew", pady = 0)
 
+
 # Buttons for GUI
 btn_bubble_sort = tk.Button(frm_algorithms, text = "Bubble Sort")
 btn_insertion_sort = tk.Button(frm_algorithms, text = "Insertion Sort")
 btn_selection_sort = tk.Button(frm_algorithms, text = "Selection Sort")
 btn_reset = tk.Button(frm_number_slider, text = "Reset")
-scl_arr_size = tk.Scale(frm_number_slider, from_ = 1, to = 200, orient=tk.HORIZONTAL)
+sldr_arr_size = tk.Scale(frm_number_slider, from_ = 1, to = 200, orient=tk.HORIZONTAL, length = 500)
+btw_speed = tk.Button(frm_number_slider, text="Speed")
 
-btn_bubble_sort.grid(row = 0, column = 0, padx = 5, sticky = "ew")
+btn_bubble_sort.grid(row = 0, column = 0, padx = 5, sticky = "e")
 btn_insertion_sort.grid(row = 0, column = 1, padx = 5, sticky = "ew")
-btn_selection_sort.grid(row = 0, column = 2, padx = 5, sticky = "ew")
+btn_selection_sort.grid(row = 0, column = 2, padx = 5, sticky = "w")
 btn_reset.grid(row = 0, column = 0)
-scl_arr_size.grid(row = 0, column = 1, padx = 85)
+sldr_arr_size.grid(row = 0, column = 1, padx = 75)
+btw_speed.grid(row=0, column = 2)
 
 
 
