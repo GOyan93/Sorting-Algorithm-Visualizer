@@ -8,7 +8,8 @@ Created on Tue Jul 27 16:44:30 2021
 
 
 import tkinter as tk
-#import Algorithms
+import random
+
 
 
 # Creates window for GUI
@@ -28,8 +29,9 @@ arr_length = 2
 spd_slide_visible = False
 
 
-unsorted_array = [x for x in range(1, 16)]
-print(unsorted_array)
+visual_array = [x for x in range(1, 16)]
+unsorted_array = visual_array.copy()
+
 
 # Functions for buttons
 def bubble():
@@ -51,7 +53,11 @@ def speed_slide():
         spd_slide_visible = True
         
 def reset_click():
-    pass
+    unsorted_array = random.shuffle(visual_array)
+    for number in unsorted_array:
+        tk.Label(frm_graph_visual, text = str(number), height = number, width = 2, bg = "red", fg = "white").grid(row=0, column = number, padx = 1, sticky = "s")
+    
+    
             
 
 
@@ -72,6 +78,8 @@ frm_number_slider.grid(row = 3, sticky = "ew", pady = 0)
 btn_bubble_sort = tk.Button(frm_algorithms, text = "Bubble Sort")
 btn_insertion_sort = tk.Button(frm_algorithms, text = "Insertion Sort")
 btn_selection_sort = tk.Button(frm_algorithms, text = "Selection Sort")
+lbl_graph_space_1 = tk.Label(frm_graph_visual, width = 7)
+
 btn_reset = tk.Button(frm_number_slider, text = "Randomize", command = reset_click)
 sldr_arr_size = tk.Scale(frm_number_slider, from_ = 2, to = 200, orient=tk.HORIZONTAL, length = 100, variable = arr_length, state="disabled")
 btn_speed = tk.Button(frm_number_slider, text="Speed", command = speed_slide, state="disabled")
@@ -85,9 +93,11 @@ for number in unsorted_array:
 btn_bubble_sort.grid(row = 0, column = 0, padx = 5, sticky = "e")
 btn_insertion_sort.grid(row = 0, column = 1, padx = 5, sticky = "ew")
 btn_selection_sort.grid(row = 0, column = 2, padx = 5, sticky = "w")
+lbl_graph_space_1.grid(row = 0, column = 0, sticky = "w")
 btn_reset.grid(row = 0, column = 0)
 sldr_arr_size.grid(row = 0, column = 1, padx = 75, sticky = "ew")
 btn_speed.grid(row=0, column = 2)
+
 
 
 
