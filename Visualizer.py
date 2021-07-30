@@ -28,7 +28,7 @@ arr_length = 2
 spd_slide_visible = False
 
 
-unsorted_array = [1, 2]
+unsorted_array = [x for x in range(1, 16)]
 print(unsorted_array)
 
 # Functions for buttons
@@ -72,10 +72,10 @@ frm_number_slider.grid(row = 3, sticky = "ew", pady = 0)
 btn_bubble_sort = tk.Button(frm_algorithms, text = "Bubble Sort")
 btn_insertion_sort = tk.Button(frm_algorithms, text = "Insertion Sort")
 btn_selection_sort = tk.Button(frm_algorithms, text = "Selection Sort")
-btn_reset = tk.Button(frm_number_slider, text = "Reset", command = reset_click)
-sldr_arr_size = tk.Scale(frm_number_slider, from_ = 2, to = 200, orient=tk.HORIZONTAL, length = 100, variable = arr_length)
-btn_speed = tk.Button(frm_number_slider, text="Speed", command = speed_slide)
-slider_sort_speed = tk.Scale(frm_speed_slider, from_ = 1, to = 10, orient = tk.VERTICAL)
+btn_reset = tk.Button(frm_number_slider, text = "Randomize", command = reset_click)
+sldr_arr_size = tk.Scale(frm_number_slider, from_ = 2, to = 200, orient=tk.HORIZONTAL, length = 100, variable = arr_length, state="disabled")
+btn_speed = tk.Button(frm_number_slider, text="Speed", command = speed_slide, state="disabled")
+slider_sort_speed = tk.Scale(frm_speed_slider, from_ = 1, to = 10, orient = tk.VERTICAL, state="disabled")
 
 for number in unsorted_array:
     tk.Label(frm_graph_visual, text = str(number), height = number, width = 2, bg = "red", fg = "white").grid(row=0, column = number, padx = 1, sticky = "s")
