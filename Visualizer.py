@@ -18,7 +18,23 @@ window.rowconfigure(0, minsize = 50, weight = 1)
 window.rowconfigure(1, minsize = 400, weight = 1)
 window.rowconfigure(2, minsize = 50, weight = 1)
 
+# Variables
+speed = tk.DoubleVar()
+arr_length = tk.IntVar()
 
+# Functions for buttons
+def bubble():
+    pass
+
+def selection():
+    pass
+
+def insertion():
+    pass
+
+def speed_slide():
+        slider_sort_speed.grid(row = 2, column = 2, sticky = "e")
+            
 
 # Creates layout of GUI
 frm_algorithms = tk.Frame(master = window)
@@ -35,14 +51,15 @@ btn_bubble_sort = tk.Button(frm_algorithms, text = "Bubble Sort")
 btn_insertion_sort = tk.Button(frm_algorithms, text = "Insertion Sort")
 btn_selection_sort = tk.Button(frm_algorithms, text = "Selection Sort")
 btn_reset = tk.Button(frm_number_slider, text = "Reset")
-sldr_arr_size = tk.Scale(frm_number_slider, from_ = 1, to = 200, orient=tk.HORIZONTAL, length = 500)
-btn_speed = tk.Button(frm_number_slider, text="Speed")
+sldr_arr_size = tk.Scale(frm_number_slider, from_ = 2, to = 200, orient=tk.HORIZONTAL, length = 100, variable = arr_length)
+btn_speed = tk.Button(frm_number_slider, text="Speed", command = speed_slide)
+slider_sort_speed = tk.Scale(frm_graph_visual, from_ = 1, to = 10, orient = tk.VERTICAL)
 
 btn_bubble_sort.grid(row = 0, column = 0, padx = 5, sticky = "e")
 btn_insertion_sort.grid(row = 0, column = 1, padx = 5, sticky = "ew")
 btn_selection_sort.grid(row = 0, column = 2, padx = 5, sticky = "w")
 btn_reset.grid(row = 0, column = 0)
-sldr_arr_size.grid(row = 0, column = 1, padx = 75)
+sldr_arr_size.grid(row = 0, column = 1, padx = 75, sticky = "ew")
 btn_speed.grid(row=0, column = 2)
 
 
