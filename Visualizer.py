@@ -8,7 +8,7 @@ Created on Tue Jul 27 16:44:30 2021
 
 
 import tkinter as tk
-import random
+import random, time
 
 
 
@@ -34,9 +34,38 @@ unsorted_array = visual_array.copy()
 label_list = []
 
 # Functions for buttons
+def screen_reset():
+    global unsorted_array
+    for position, value in enumerate(unsorted_array):
+        tk.Label(frm_graph_visual, height = value, width = 2).grid(row=0, column = position+1, padx = 1, sticky = "s")
+    for position, value in enumerate(unsorted_array):
+        tk.Label(frm_graph_visual, text = str(value), height = value, width = 2, bg = "red", fg = "white").grid(row=0, column = position+1, padx = 1, sticky = "s")
+        
 def bubble():
-    pass
-
+    global unsorted_array
+    screen_reset()
+    for i in range(len(unsorted_array)-1, 0, -1):
+        tk.Label(frm_graph_visual, text = str(unsorted_array[i]), height = unsorted_array[i], width = 2, bg = "white", fg = "black").grid(row=0, column = i+1, padx = 1, sticky = "s")
+        screen_reset()
+        for j in range(i):
+            #tk.Label(frm_graph_visual, text = str(unsorted_array[j]), height = unsorted_array[j], width = 2, bg = "white", fg = "black").grid(row=0, column = j+1, padx = 1, sticky = "s")
+            if unsorted_array[j] > unsorted_array[j+1]:
+                #tk.Label(frm_graph_visual, text = str(unsorted_array[j]), height = unsorted_array[j], width = 2, bg = "yellow", fg = "black").grid(row=0, column = j+1, padx = 1, sticky = "s")
+                #tk.Label(frm_graph_visual, text = str(unsorted_array[i]), height = unsorted_array[i], width = 2, bg = "yellow", fg = "black").grid(row=0, column = i+1, padx = 1, sticky = "s")
+                #time.sleep(0.2)
+                #tk.Label(frm_graph_visual, height = unsorted_array[j], width = 2).grid(row=0, column = j+1, padx = 1, sticky = "s")
+                #tk.Label(frm_graph_visual, height = unsorted_array[i], width = 2).grid(row=0, column = i+1, padx = 1, sticky = "s")
+                temp = unsorted_array[j]
+                unsorted_array[j] = unsorted_array[j+1]
+                unsorted_array[j+1] = temp
+                screen_reset()
+                #tk.Label(frm_graph_visual, text = str(unsorted_array[j]), height = unsorted_array[j], width = 2, bg = "green", fg = "black").grid(row=0, column = j+1, padx = 1, sticky = "s")
+                #tk.Label(frm_graph_visual, text = str(unsorted_array[i]), height = unsorted_array[i], width = 2, bg = "green", fg = "black").grid(row=0, column = i+1, padx = 1, sticky = "s")
+                #time.sleep(0.2)
+                #tk.Label(frm_graph_visual, text = str(unsorted_array[i]), height = unsorted_array[i], width = 2, bg = "red", fg = "black").grid(row=0, column = i+1, padx = 1, sticky = "s")
+                #tk.Label(frm_graph_visual, text = str(unsorted_array[j]), height = unsorted_array[j], width = 2, bg = "red", fg = "black").grid(row=0, column = j+1, padx = 1, sticky = "s")
+    screen_reset()
+    print(unsorted_array)
 def selection():
     pass
 
@@ -85,7 +114,7 @@ frm_number_scale.grid(row = 3, sticky = "ew", pady = 0)
 # Widgets for GUI
 
 # Sorting Algorithm selections
-btn_bubble_sort = tk.Button(frm_algorithms, text = "Bubble Sort")
+btn_bubble_sort = tk.Button(frm_algorithms, text = "Bubble Sort", command = bubble)
 btn_insertion_sort = tk.Button(frm_algorithms, text = "Insertion Sort")
 btn_selection_sort = tk.Button(frm_algorithms, text = "Selection Sort")
 
@@ -95,7 +124,7 @@ lbl_graph_space_end = tk.Label(frm_graph_visual, width = 7)
 
 # Bottom Widgets
 btn_reset = tk.Button(frm_number_scale, text = "Randomize", command = reset_click)
-scale_array_size = tk.Scale(frm_number_scale, from_ = 2, to = 40, orient=tk.HORIZONTAL, length = 100, variable = arr_length+1)
+scale_array_size = tk.Scale(frm_number_scale, from_ = 2, to = 100, orient=tk.HORIZONTAL, length = 100, variable = arr_length+1)
 btn_speed = tk.Button(frm_number_scale, text="Speed", command = speed_scale)
 scale_sort_speed = tk.Scale(frm_graph_visual, from_ = 100, to = 10, tickinterval = 10, orient = tk.VERTICAL)
 
