@@ -1,8 +1,5 @@
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
 """
 Created on Sun Aug  1 11:52:31 2021
-
 @author: greg
 """
 
@@ -11,7 +8,6 @@ Created on Sun Aug  1 11:52:31 2021
 # -*- coding: utf-8 -*-
 """
 Created on Tue Jul 27 16:44:30 2021
-
 @author: greg
 """
 
@@ -33,16 +29,17 @@ window.rowconfigure(3, minsize = 50, weight = 1)
 
 # Variables
 speed = tk.DoubleVar()
+speed = 1.0
 arr_length = tk.IntVar()
-arr_length = 16
+arr_length = 3
 spd_scale_visible = False
 dict_labels = {}
 
 
 # Creates list of values for dictionary assignement, [label key, value, column, bg color, fg color]
-visual_array = [["label_bar_" + str(x), x, "white", "black"]  for x in range(1, 16)]
+visual_array = [["label_bar_" + str(x), x, "black", "white"]  for x in range(1, 16)]
 unsorted_array = visual_array.copy()
-
+print(unsorted_array)
 # Creates label objects within dictionary for storing label variables [Value, column, bg color, fg color, associated label object]
 def reset_dictionary(): 
     global dict_labels, unsorted_array
@@ -51,6 +48,7 @@ def reset_dictionary():
         
 def draw_screen():
     global dict_labels, unsorted_array
+    
     for item in unsorted_array:  
         dict_labels[item[0]][4].grid(row=0, column = dict_labels[item[0]][1], padx = 1, sticky = "s")
     
@@ -70,7 +68,6 @@ def bubble():
     global unsorted_array
     global dict_labels
     screen_reset()
-    
     for i in range(len(unsorted_array)-1, 0, -1):
         for j in range(i):
             unsorted_array[j][2] = "yellow"
@@ -84,8 +81,8 @@ def bubble():
                 unsorted_array[j][1] = unsorted_array[j+1][1]
                 unsorted_array[j+1][1] = temp
                 screen_reset()  
-            unsorted_array[j][2] = "white"
-            unsorted_array[j+1][2] = "white"
+            unsorted_array[j][2] = "black"
+            unsorted_array[j+1][2] = "black"
             screen_reset()
         screen_reset()
                 
@@ -117,12 +114,14 @@ def reset_click():        # Clears the graph by changing colour of bars. Randomi
     lbl_graph_space_end.grid_forget()
      
     arr_length = scale_array_size.get() + 1
-    visual_array = [["label_bar_" + str(x), x, "white", "black"]  for x in range(1, arr_length)]
+    visual_array = [["label_bar_" + str(x), x, "black", "white"]  for x in range(1, arr_length)]
     unsorted_array = visual_array.copy()
-    random.shuffle(unsorted_array)
-    lbl_graph_space_end.grid(row = 0, column = len(unsorted_array)+1, sticky = "e")  
-    reset_dictionary()
-    draw_screen()
+    for x in range(100):
+        clear_screen()
+        random.shuffle(unsorted_array)
+        lbl_graph_space_end.grid(row = 0, column = len(unsorted_array)+1, sticky = "e")  
+        reset_dictionary()
+        draw_screen()
         
 
 
