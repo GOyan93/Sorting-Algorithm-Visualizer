@@ -28,43 +28,38 @@ arr_length = tk.IntVar()
 arr_length = 16
 spd_scale_visible = False
 dict_labels = {}
+label_color = "blue"
+text_color = "white"
 
 
 # Creates list of values for dictionary assignement, [label key, value, column, bg color, fg color]
-visual_array = [["label_bar_" + str(x), x, "white", "black"]  for x in range(1, 16)]
+visual_array = [["label_bar_" + str(x), x, label_color, text_color]  for x in range(1, 16)]
 unsorted_array = visual_array.copy()
 
 
 # Functions for buttons
-def screen_reset():
-    global unsorted_array
-    for position, value in enumerate(unsorted_array):
-        tk.Label(frm_graph_visual, height = value, width = 2).grid(row=0, column = position+1, padx = 1, sticky = "s")
-    for position, value in enumerate(unsorted_array):
-        tk.Label(frm_graph_visual, text = str(value), height = value, width = 2, bg = "red", fg = "white").grid(row=0, column = position+1, padx = 1, sticky = "s")
         
-def bubble():               # Brings lowest value to bottom and repeats process
+def bubble():
     global unsorted_array
     global dict_labels
     screen_reset()
-    
     for i in range(len(unsorted_array)-1, 0, -1):
         for j in range(i):
-            unsorted_array[j][2] = "yellow"                 # Changes the selected item to yellow
-            unsorted_array[j+1][2] = "yellow"               # Changes the comparitor item to yellow
+            unsorted_array[j][2] = "yellow"
+            unsorted_array[j+1][2] = "yellow"
             screen_reset()
             if unsorted_array[j][1] > unsorted_array[j+1][1]:
-                unsorted_array[j][2] = "red"                # If swap occurs, changes item color to red
-                unsorted_array[j+1][2] = "red"              # If swap occurs, changes comparitor item color to red
+                unsorted_array[j][2] = "red"
+                unsorted_array[j+1][2] = "red"
                 screen_reset()
                 temp = unsorted_array[j][1]
                 unsorted_array[j][1] = unsorted_array[j+1][1]
                 unsorted_array[j+1][1] = temp
                 screen_reset()  
-            unsorted_array[j][2] = "white"                  # Resets selected item color to white
-            unsorted_array[j+1][2] = "white"                # Resets comparitor item color to white
+            unsorted_array[j][2] = label_color
+            unsorted_array[j+1][2] = label_color
             screen_reset()
-        screen_reset()    
+        screen_reset()
     
 def selection():
     pass
@@ -85,17 +80,15 @@ def speed_scale():        # Displays and hides the scale to control the algorith
         
 def reset_click():        # Clears the graph by changing colour of bars. Randomizes list. Displays list as vertical bars.
     global unsorted_array, visual_array, arr_length, lbl_graph_space_end
-    for position, value in enumerate(unsorted_array):
-        tk.Label(frm_graph_visual, height = value, width = 2).grid(row=0, column = position+1, padx = 1, sticky = "s")
-    lbl_graph_space_end.grid_forget()
-     
+    clear_screen()
     arr_length = scale_array_size.get() + 1
-    visual_array = [x for x in range(1, arr_length)]
+    visual_array = [["label_bar_" + str(x), x, label_color, text_color]  for x in range(1, arr_length)]
     unsorted_array = visual_array.copy()
-    random.shuffle(unsorted_array)
-    lbl_graph_space_end.grid(row = 0, column = len(unsorted_array)+1, sticky = "e")  
-    for position, value in enumerate(unsorted_array):
-        tk.Label(frm_graph_visual, text = str(value), height = value, width = 2, bg = "red", fg = "white").grid(row=0, column = position+1, padx = 1, sticky = "s")
+    for x in range(len(unsorted_array)):
+        random.shuffle(unsorted_array)
+        lbl_graph_space_end.grid(row = 0, column = len(unsorted_array)+1, sticky = "e")  
+    reset_dictionary()
+    draw_screen()
         
 # Functions for underlying processes
         
@@ -121,7 +114,6 @@ def screen_reset():             # Clears the visual, resets the label arguments,
     reset_dictionary()
     draw_screen()
 
-
 # Creates layout of GUI
 frm_algorithms = tk.Frame(master = window)
 frm_graph_visual = tk.Frame(master = window)
@@ -133,7 +125,7 @@ frm_graph_visual.grid(row = 1, sticky = "s", pady = 2)
 frm_speed_scale.grid(row = 2, pady = 1)
 frm_number_scale.grid(row = 3, sticky = "ew", pady = 0)
 
-
+reset_dictionary()
 # Widgets for GUI
 
 # Sorting Algorithm selections
@@ -153,8 +145,9 @@ scale_sort_speed = tk.Scale(frm_graph_visual, from_ = 100, to = 10, tickinterval
 
 
 # Displays the visual of the numbered list
-for number in unsorted_array:
-    tk.Label(frm_graph_visual, text = str(number), height = number, width = 2, bg = "red", fg = "white").grid(row=0, column = number, padx = 1, sticky = "s")
+for item in unsorted_array:
+    dict_labels[item[0]][4].grid(row=0, column = dict_labels[item[0]][1], padx = 1, sticky = "s")
+
     
     
 # Grid Functions  
@@ -171,6 +164,7 @@ lbl_graph_space_end.grid(row = 0, column = len(unsorted_array)+1, sticky = "e")
 # Bottom Widgets 
 btn_reset.grid(row = 0, column = 0)
 scale_array_size.grid(row = 0, column = 1, padx = 75, sticky = "ew")
+scale_array_size.set(15)
 btn_speed.grid(row=0, column = 2)
 
 
