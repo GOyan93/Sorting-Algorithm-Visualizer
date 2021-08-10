@@ -25,13 +25,15 @@ window.rowconfigure(3, minsize = 50, weight = 1)
 # Variables
 speed = tk.DoubleVar()
 arr_length = tk.IntVar()
-arr_length = 3
+arr_length = 16
 spd_scale_visible = False
+dict_labels = {}
 
 
-visual_array = [x for x in range(1, 16)]
+# Creates list of values for dictionary assignement, [label key, value, column, bg color, fg color]
+visual_array = [["label_bar_" + str(x), x, "white", "black"]  for x in range(1, 16)]
 unsorted_array = visual_array.copy()
-label_list = []
+
 
 # Functions for buttons
 def screen_reset():
@@ -41,31 +43,29 @@ def screen_reset():
     for position, value in enumerate(unsorted_array):
         tk.Label(frm_graph_visual, text = str(value), height = value, width = 2, bg = "red", fg = "white").grid(row=0, column = position+1, padx = 1, sticky = "s")
         
-def bubble():
+def bubble():               # Brings lowest value to bottom and repeats process
     global unsorted_array
+    global dict_labels
     screen_reset()
+    
     for i in range(len(unsorted_array)-1, 0, -1):
-        tk.Label(frm_graph_visual, text = str(unsorted_array[i]), height = unsorted_array[i], width = 2, bg = "white", fg = "black").grid(row=0, column = i+1, padx = 1, sticky = "s")
-        screen_reset()
         for j in range(i):
-            #tk.Label(frm_graph_visual, text = str(unsorted_array[j]), height = unsorted_array[j], width = 2, bg = "white", fg = "black").grid(row=0, column = j+1, padx = 1, sticky = "s")
-            if unsorted_array[j] > unsorted_array[j+1]:
-                #tk.Label(frm_graph_visual, text = str(unsorted_array[j]), height = unsorted_array[j], width = 2, bg = "yellow", fg = "black").grid(row=0, column = j+1, padx = 1, sticky = "s")
-                #tk.Label(frm_graph_visual, text = str(unsorted_array[i]), height = unsorted_array[i], width = 2, bg = "yellow", fg = "black").grid(row=0, column = i+1, padx = 1, sticky = "s")
-                #time.sleep(0.2)
-                #tk.Label(frm_graph_visual, height = unsorted_array[j], width = 2).grid(row=0, column = j+1, padx = 1, sticky = "s")
-                #tk.Label(frm_graph_visual, height = unsorted_array[i], width = 2).grid(row=0, column = i+1, padx = 1, sticky = "s")
-                temp = unsorted_array[j]
-                unsorted_array[j] = unsorted_array[j+1]
-                unsorted_array[j+1] = temp
+            unsorted_array[j][2] = "yellow"                 # Changes the selected item to yellow
+            unsorted_array[j+1][2] = "yellow"               # Changes the comparitor item to yellow
+            screen_reset()
+            if unsorted_array[j][1] > unsorted_array[j+1][1]:
+                unsorted_array[j][2] = "red"                # If swap occurs, changes item color to red
+                unsorted_array[j+1][2] = "red"              # If swap occurs, changes comparitor item color to red
                 screen_reset()
-                #tk.Label(frm_graph_visual, text = str(unsorted_array[j]), height = unsorted_array[j], width = 2, bg = "green", fg = "black").grid(row=0, column = j+1, padx = 1, sticky = "s")
-                #tk.Label(frm_graph_visual, text = str(unsorted_array[i]), height = unsorted_array[i], width = 2, bg = "green", fg = "black").grid(row=0, column = i+1, padx = 1, sticky = "s")
-                #time.sleep(0.2)
-                #tk.Label(frm_graph_visual, text = str(unsorted_array[i]), height = unsorted_array[i], width = 2, bg = "red", fg = "black").grid(row=0, column = i+1, padx = 1, sticky = "s")
-                #tk.Label(frm_graph_visual, text = str(unsorted_array[j]), height = unsorted_array[j], width = 2, bg = "red", fg = "black").grid(row=0, column = j+1, padx = 1, sticky = "s")
-    screen_reset()
-    print(unsorted_array)
+                temp = unsorted_array[j][1]
+                unsorted_array[j][1] = unsorted_array[j+1][1]
+                unsorted_array[j+1][1] = temp
+                screen_reset()  
+            unsorted_array[j][2] = "white"                  # Resets selected item color to white
+            unsorted_array[j+1][2] = "white"                # Resets comparitor item color to white
+            screen_reset()
+        screen_reset()    
+    
 def selection():
     pass
 
@@ -97,6 +97,29 @@ def reset_click():        # Clears the graph by changing colour of bars. Randomi
     for position, value in enumerate(unsorted_array):
         tk.Label(frm_graph_visual, text = str(value), height = value, width = 2, bg = "red", fg = "white").grid(row=0, column = position+1, padx = 1, sticky = "s")
         
+# Functions for underlying processes
+        
+
+def reset_dictionary():         # Creates label objects within dictionary for storing label variables [Value, column, bg color, fg color, associated label object]
+    global dict_labels, unsorted_array
+    for position, item in enumerate(unsorted_array):
+        dict_labels[item[0]] = [item[1], position+1, item[2], item[3], tk.Label(frm_graph_visual, text = str(item[1]), height = item[1], width = 2, bg = item[2], fg = item[3]) ]
+
+def draw_screen():              # Iterates through the label list and calls the label associated with each item. 
+    global dict_labels, unsorted_array
+    for item in unsorted_array:  
+        dict_labels[item[0]][4].grid(row=0, column = dict_labels[item[0]][1], padx = 1, sticky = "s")
+    
+def clear_screen():             # Iterates through the array and calls the destroy function on each assoicated label
+    global dict_labels, unsorted_array
+    for item in unsorted_array:
+        dict_labels[item[0]][4].destroy() 
+
+def screen_reset():             # Clears the visual, resets the label arguments, redraws the visual
+    global dict_labels, unsorted_array
+    clear_screen()
+    reset_dictionary()
+    draw_screen()
 
 
 # Creates layout of GUI
