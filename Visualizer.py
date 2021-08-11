@@ -62,10 +62,31 @@ def bubble():
         screen_reset()
     
 def selection():
-    pass
+    global unosrted_array
+    global dict_labels
+    for i in range(len(unsorted_array)-1, 0, -1):
+        position_of_max = 0
+        for j in range(1, i+1):
+            if unsorted_array[position_of_max][1] < unsorted_array[j][1]:
+                position_of_max = j
+            temp = unsorted_array[i]
+            unsorted_array[i] = unsorted_array[position_of_max]
+            unsorted_array[position_of_max] = temp
+            screen_reset()
+    screen_reset()
 
 def insertion():
-    pass
+    global unsorted_array
+    global dict_labels
+    for i in range(1, len(unsorted_array)):
+        current_value = unsorted_array[i]
+        while i>0 and unsorted_array[i][1] < unsorted_array[i-1][1]:
+            unsorted_array[i] = unsorted_array[i-1]
+            i -= 1
+            unsorted_array[i] = current_value
+            screen_reset()
+    screen_reset()
+    
 
 def speed_scale():        # Displays and hides the scale to control the algorithm speed
     global spd_scale_visible, unsorted_array
@@ -130,8 +151,8 @@ reset_dictionary()
 
 # Sorting Algorithm selections
 btn_bubble_sort = tk.Button(frm_algorithms, text = "Bubble Sort", command = bubble)
-btn_insertion_sort = tk.Button(frm_algorithms, text = "Insertion Sort")
-btn_selection_sort = tk.Button(frm_algorithms, text = "Selection Sort")
+btn_insertion_sort = tk.Button(frm_algorithms, text = "Insertion Sort", command = insertion)
+btn_selection_sort = tk.Button(frm_algorithms, text = "Selection Sort", command = selection)
 
 # Graph Spacing
 lbl_graph_space_start = tk.Label(frm_graph_visual, width = 7)
