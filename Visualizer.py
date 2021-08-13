@@ -30,8 +30,6 @@ spd_scale_visible = False
 dict_labels = {}
 label_color = "navy blue"
 text_color = "white"
-WINDOW_BG = "grey"
-WINDOW_FG = "white"
 
 # Creates list of values for dictionary assignement, [label key, value, column, bg color, fg color]
 visual_array = [["label_bar_" + str(x), x, label_color, text_color]  for x in range(1, 16)]
@@ -106,7 +104,7 @@ def speed_scale():        # Displays and hides the scale to control the algorith
     global spd_scale_visible, unsorted_array
     if spd_scale_visible == True:
         scale_sort_speed.grid_forget()
-        lbl_graph_space_end.grid(row = 0, column = len(unsorted_array)+1, sticky = "e") 
+        lbl_graph_space_end.grid(row = 0, column = 3, sticky = "e") 
         spd_scale_visible = False
     else:    
         lbl_graph_space_end.grid_forget()
@@ -177,9 +175,9 @@ lbl_graph_space_end = tk.Label(frm_graph_visual, width = 7)
 
 # Bottom Widgets
 btn_reset = tk.Button(frm_number_scale, text = "Randomize", command = reset_click)
-scale_array_size = tk.Scale(frm_number_scale, from_ = 2, to = 100, orient=tk.HORIZONTAL, length = 100, variable = arr_length+1)
+scale_array_size = tk.Scale(frm_number_scale, from_ = 2, to = 50, orient=tk.HORIZONTAL, length = 100, variable = arr_length+1)
 btn_speed = tk.Button(frm_number_scale, text="Speed", command = speed_scale)
-scale_sort_speed = tk.Scale(frm_graph_visual, from_ = 100, to = 10, tickinterval = 10, orient = tk.VERTICAL)
+scale_sort_speed = tk.Scale(frm_graph_visual, from_ = 100, to = 10, tickinterval = 20, orient = tk.VERTICAL)
 
 
 # Displays the visual of the numbered list
