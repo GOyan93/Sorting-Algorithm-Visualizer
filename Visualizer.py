@@ -106,10 +106,13 @@ def speed_scale():        # Displays and hides the scale to control the algorith
         scale_sort_speed.grid_forget()
         lbl_graph_space_end.grid(row = 0, column = 3, sticky = "e") 
         spd_scale_visible = False
+        
     else:    
         lbl_graph_space_end.grid_forget()
-        scale_sort_speed.grid(column = len(unsorted_array)+1, sticky = "ns")
+        scale_sort_speed.grid(column = len(unsorted_array)+2, sticky = "ns")
         spd_scale_visible = True
+        
+    screen_reset()
         
 def reset_click():        # Clears the graph by changing colour of bars. Randomizes list. Displays list as vertical bars.
     global unsorted_array, visual_array, arr_length, lbl_graph_space_end
@@ -135,6 +138,7 @@ def draw_screen():              # Iterates through the label list and calls the 
     global dict_labels, unsorted_array
     for item in unsorted_array:  
         dict_labels[item[0]][4].grid(row=0, column = dict_labels[item[0]][1], padx = 1, sticky = "s")
+        lbl_graph_space_end.grid(row = 0, column = len(unsorted_array)+1, sticky = "e")
     
 def clear_screen():             # Iterates through the array and calls the destroy function on each assoicated label
     global dict_labels, unsorted_array
