@@ -37,7 +37,7 @@ visual_array = [["label_bar_" + str(x), x, label_color, text_color]  for x in ra
 unsorted_array = visual_array.copy()
 
 
-# Functions for buttons
+# Functions for sorting buttons
         
 def bubble():
     global unsorted_array
@@ -87,6 +87,8 @@ def insertion():
             screen_reset()
     screen_reset()
     
+    
+# Functions for clickable buttons.
 
 def speed_scale():        # Displays and hides the scale to control the algorithm speed
     global spd_scale_visible, unsorted_array
@@ -111,9 +113,9 @@ def reset_click():        # Clears the graph by changing colour of bars. Randomi
     reset_dictionary()
     draw_screen()
         
+    
 # Functions for underlying processes
         
-
 def reset_dictionary():         # Creates label objects within dictionary for storing label variables [Value, column, bg color, fg color, associated label object]
     global dict_labels, unsorted_array
     for position, item in enumerate(unsorted_array):
@@ -129,11 +131,12 @@ def clear_screen():             # Iterates through the array and calls the destr
     for item in unsorted_array:
         dict_labels[item[0]][4].destroy() 
 
-def screen_reset():             # Clears the visual, resets the label arguments, redraws the visual
+def screen_reset():             # Clears the visual, resets the label arguments, redraws the visual based off of the new label arguments
     global dict_labels, unsorted_array
     clear_screen()
     reset_dictionary()
     draw_screen()
+
 
 # Creates layout of GUI
 frm_algorithms = tk.Frame(master = window)
@@ -147,6 +150,8 @@ frm_speed_scale.grid(row = 2, pady = 1)
 frm_number_scale.grid(row = 3, sticky = "ew", pady = 0)
 
 reset_dictionary()
+
+
 # Widgets for GUI
 
 # Sorting Algorithm selections
