@@ -28,9 +28,10 @@ arr_length = tk.IntVar()
 arr_length = 16
 spd_scale_visible = False
 dict_labels = {}
-label_color = "blue"
+label_color = "navy blue"
 text_color = "white"
-
+WINDOW_BG = "grey"
+WINDOW_FG = "white"
 
 # Creates list of values for dictionary assignement, [label key, value, column, bg color, fg color]
 visual_array = [["label_bar_" + str(x), x, label_color, text_color]  for x in range(1, 16)]
@@ -62,16 +63,27 @@ def bubble():
         screen_reset()
     
 def selection():
-    global unosrted_array
+    global unsorted_array
     global dict_labels
     for i in range(len(unsorted_array)-1, 0, -1):
         position_of_max = 0
+        unsorted_array[position_of_max][2] = "green"
+        screen_reset()
         for j in range(1, i+1):
+            unsorted_array[j][2] = "yellow"
             if unsorted_array[position_of_max][1] < unsorted_array[j][1]:
+                unsorted_array[j][2] = "green"
+                unsorted_array[position_of_max][2] = label_color
                 position_of_max = j
+                screen_reset()
             temp = unsorted_array[i]
+            unsorted_array[i][2] = "red"
+            unsorted_array[position_of_max][2] = "green"
+            screen_reset()
             unsorted_array[i] = unsorted_array[position_of_max]
             unsorted_array[position_of_max] = temp
+            unsorted_array[i][2] = label_color
+            unsorted_array[position_of_max][2] = label_color
             screen_reset()
     screen_reset()
 
